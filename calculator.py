@@ -25,4 +25,10 @@ class Calculator:
     
     def exp(self, x, y):
         return math.pow(x, y)
+    
+    def inv(self, x):
+        return x ** -1
+    
+    def neg(self, x):
+        return x * -1
 # add lots more methods to this calculator class.

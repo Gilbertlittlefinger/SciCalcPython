@@ -41,5 +41,17 @@ class TestStringMethods(unittest.TestCase):
         c = Calculator()
         self.assertEqual(c.exp(9,3), 729)
 
+    def inv(self):
+        c = Calculator()
+        self.assertEqual(c.inv(5), .2)
+
+    def neg(self):
+        c = Calculator()
+        self.assertEqual(c.neg(9), -9)
+
+    def neg(self):
+        c = Calculator()
+        self.assertEqual(c.neg(-9), 9)
+
 if __name__ == '__main__':
     unittest.main()
