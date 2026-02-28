@@ -53,5 +53,31 @@ class TestStringMethods(unittest.TestCase):
         c = Calculator()
         self.assertEqual(c.neg(-9), 9)
 
+    def sin(self):
+        c = Calculator()
+        self.assertEqual(c.neg(9), 0.4121184852417566)
+
+    def cos(self):
+        c = Calculator()
+        self.assertEqual(c.neg(9), -0.9111302618846769)
+
+    def tan(self):
+        c = Calculator()
+        self.assertEqual(c.neg(9), 0.4523156594418099)
+
+    def isin(self):
+        c = Calculator()
+        self.assertEqual(c.neg(-1), -1.5707963267948966)
+
+    def icos(self):
+        c = Calculator()
+        self.assertEqual(c.neg(-1), 3.141592653589793)
+
+    def itanmath(self):
+        c = Calculator()
+        self.assertEqual(c.neg(-1), -0.7853981633974483)
+
+    
+
 if __name__ == '__main__':
     unittest.main()

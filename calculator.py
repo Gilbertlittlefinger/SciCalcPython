@@ -31,4 +31,23 @@ class Calculator:
     
     def neg(self, x):
         return x * -1
+    
+    def sin(self, x):
+        return math.sin(x)
+    
+    def cos(self, x):
+        return math.cos(x)
+    
+    def tan(self, x):
+        return math.tan(x)
+    
+    def isin(self, x):
+        return math.asin(x)
+    
+    def icos(self, x):
+        return math.acos(x)
+    
+    def itan(self, x):
+        return math.atan(x)
+
 # add lots more methods to this calculator class.
