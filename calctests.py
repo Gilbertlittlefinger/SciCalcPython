@@ -20,6 +20,12 @@ class TestStringMethods(unittest.TestCase):
         c = Calculator()
         self.assertEqual(c.sub(9, 3), 6)
 
+    def test_mult(self):
+        c = Calculator()
+        self.assertEqual(c.mult(9, 3), 27)
 
+    def test_div(self):
+        c = Calculator()
+        self.assertEqual(c.div(9, 3), 3)
 if __name__ == '__main__':
     unittest.main()
