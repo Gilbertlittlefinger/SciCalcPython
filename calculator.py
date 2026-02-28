@@ -50,4 +50,16 @@ class Calculator:
     def itan(self, x):
         return math.atan(x)
 
+    def deg(self, x):
+        return math.degrees(x)
+    
+    def rad(self, x):
+        return math.radians(x)
+    
+    def fac(self, x):
+        return math.factorial(x)
+    
+    def log(self, x):
+        return math.log(x)
+
 # add lots more methods to this calculator class.
