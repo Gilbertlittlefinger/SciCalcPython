@@ -93,6 +93,18 @@ class TestStringMethods(unittest.TestCase):
         c = Calculator()
         self.assertEqual(c.log(9), 2.1972245773362196)
 
+    def log10(self):
+        c = Calculator()
+        self.assertEqual(c.log10(9), 0.9542425094393249)
+
+    def natlog(self):
+        c = Calculator()
+        self.assertEqual(c.natlog(9), 2.302585092994046)
+
+    def in_natlog(self):
+        c = Calculator()
+        self.assertEqual(c.in_natlog(9), 0.43429448190325176)
+
     
 
 if __name__ == '__main__':

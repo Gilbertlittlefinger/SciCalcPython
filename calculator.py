@@ -61,5 +61,20 @@ class Calculator:
     
     def log(self, x):
         return math.log(x)
+    
+    def log10(self, x):
+        return math.log10(x)
+    
+    def log(self, x):
+        return math.log(x)
+    
+    def log(self, x):
+        return math.log(x)
+    
+    def natlog(self, x):
+        return math.log1p(x)
+    
+    def in_natlog(self, x):
+        return math.pow(log1p(x),-1)
 
 # add lots more methods to this calculator class.
