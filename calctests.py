@@ -105,6 +105,9 @@ class TestStringMethods(unittest.TestCase):
         c = Calculator()
         self.assertEqual(c.in_natlog(9), 0.43429448190325176)
 
+    def infinity(self):
+        c = Calculator()
+        self.assertEqual(c.infinity(9),NaN)
     
 
 if __name__ == '__main__':
