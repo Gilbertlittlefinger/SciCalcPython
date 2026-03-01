@@ -69,7 +69,7 @@ class Calculator:
         return math.log1p(x)
     
     def in_natlog(self, x):
-        return math.pow(log1p(x),-1)
+        return math.pow(math.log1p(x),-1)
     
     def infinity(self, x):
         return math.isinfinite(x)
