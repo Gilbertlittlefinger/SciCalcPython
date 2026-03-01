@@ -156,7 +156,6 @@ def performCalcLoop(calc, dis):
             a, b = getTwoNumbers(result_history)
             result = calc.div(a, b)
             if b == 0:
-                result_format = f"{a} / {b} = Error (division by zero is not allowed)"
                 continue
             else:
                 result_format = f"{a} / {b} = {result}"
@@ -171,7 +170,10 @@ def performCalcLoop(calc, dis):
             print("\nFormat: sqrt([number])")
             a = getOneNumber(result_history)
             result = calc.root2(a)
-            result_format = f"sqrt({a}) = {result}"
+            if a < 0:
+                continue
+            else:
+                result_format = f"sqrt({a}) = {result}"
 
         elif choice == 'exp':
             print("\nFormat: [number1] ^ [number2]")
@@ -256,13 +258,19 @@ def performCalcLoop(calc, dis):
             print("\nFormat: log([number])")
             a = getOneNumber(result_history)
             result = calc.log(a)
-            result_format = f"log({a}) = {result}"
+            if a <= 0:
+                continue
+            else:
+                result_format = f"log({a}) = {result}"
 
         elif choice == 'log10':
             print("\nFormat: log10([number])")
             a = getOneNumber(result_history)
             result = calc.log10(a)
-            result_format = f"log10({a}) = {result}"
+            if a <= 0:
+                continue
+            else:
+                result_format = f"log10({a}) = {result}"
 
         elif choice == 'natlog':
             print("\nFormat: ln([number])")
@@ -274,7 +282,10 @@ def performCalcLoop(calc, dis):
             print("\nFormat: in_ln([number])")
             a = getOneNumber(result_history)
             result = calc.in_natlog(a)
-            result_format = f"in_ln({a}) = {result}"
+            if result is None:
+                continue
+            else:
+                result_format = f"in_ln({a}) = {result}"
 
         elif choice == 'finite':
             print("\nFormat: finite([number])")
