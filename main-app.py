@@ -9,16 +9,6 @@ def getTwoNumbers():
 def getOneNumber():
     a = float(input("\nnumber? "))
     return a
-
-def trig_display(mode, switch):
-    if mode == "deg":
-        print("\nDisplaying result in degree mode.", end="")
-        return mode
-    elif mode == "rad":
-        print("\nDisplaying result in radian mode.", end="")
-        return mode
-    else:
-        return switch  # Return the current display mode if no switch command is given
     
 def displayResult(x: float, mode: str):
     if mode == "hexadecimal":
@@ -32,12 +22,23 @@ def displayResult(x: float, mode: str):
     else:
         print(x, "\n")
 
+def displayTrigResult(x: float, mode: str):
+    if mode == "degree":
+        print(f"{Calculator.deg(x,x)} degrees", end="")
+        return Calculator.deg(x,x)
+    elif mode == "radian":
+        print(f"{x} radians", end="")
+        return x
+    else:
+        print(x, "\n")
+
 
 def performCalcLoop(calc, dis):
     result = 0
     result_format = ""
     memory = 0
     switch = "decimal"  # Default display mode
+    trig_switch = "degree"  # Default trigonometric display mode
     print("\nWelcome to the Scientific Calculator!", end="")
     
     while True:
@@ -46,7 +47,8 @@ def performCalcLoop(calc, dis):
         
         switch = dis.switch_display_mode(choice, switch)    # Switch display mode if the user input is a display mode command
         memory = dis.store_memory(choice, memory, result)  # Store the user's choice in memory
-        
+        trig_switch = dis.trig_display(choice, trig_switch)          # Switch trigonometric display mode if the user input is a trig display mode command
+
         # Display operations and quit command
         if choice == 'q':
             while True:
@@ -62,14 +64,18 @@ def performCalcLoop(calc, dis):
         elif choice == 'help':
             print("\nAvailable operations: add, sub, mult, div, sqr, root2, exp, inv, neg, sin, cos, tan, isin, icos, itan, deg, rad, fac, log, log10, natlog, in_natlog, finite, abs_val")
             print("Memory operations: M+ (store current result in memory), MC (clear memory), MRC (recall memory)")
-            print("Display mode operations: hexadecimal, binary, decimal, octal, switch (automatically switch display mode), trig (automatically switch trigonometric display mode), deg (switch to degree mode), rad (switch to radian mode)")
+            print("Display mode operations: hexadecimal, binary, decimal, octal, switch (automatically switch display mode), trig (automatically switch trigonometric display mode), degree (switch to degree mode), radian (switch to radian mode)")
             print("Other operations: clear (clears the display), q (quit the calculator)")
             continue
         elif choice == 'clear':
             dis.display_clear(choice)
             continue
+
         elif choice.lower() == "switch":
             switch = dis.auto_display_mode(switch)
+            continue
+        elif choice.lower() == "trig":
+            trig_switch = dis.auto_trig_display(trig_switch)
             continue
 
         # Implementing calculator operations
@@ -128,36 +134,43 @@ def performCalcLoop(calc, dis):
             result_format = f"-{a} = {result}"
 
         elif choice == 'sin':
+            print(f"\nCurrent trigonometric input mode: {trig_switch}")
             print("\nFormat: sin([number])")
             a = getOneNumber()
+            a = calc.rad(a) if trig_switch == "degree" else a  # Convert input to radians if in degree mode
             result = calc.sin(a)
             result_format = f"sin({a}) = {result}"
 
         elif choice == 'cos':
+            print(f"\nCurrent trigonometric input mode: {trig_switch}")
             print("\nFormat: cos([number])")
             a = getOneNumber()
             result = calc.cos(a)
             result_format = f"cos({a}) = {result}"
 
         elif choice == 'tan':
+            print(f"\nCurrent trigonometric input mode: {trig_switch}")
             print("\nFormat: tan([number])")
             a = getOneNumber()
             result = calc.tan(a)
             result_format = f"tan({a}) = {result}"
 
         elif choice == 'isin':
+            print(f"\nCurrent trigonometric input mode: {trig_switch}")
             print("\nFormat: arcsin([number])")
             a = getOneNumber()
             result = calc.isin(a)
             result_format = f"arcsin({a}) = {result}"
 
         elif choice == 'icos':
+            print(f"\nCurrent trigonometric input mode: {trig_switch}")
             print("\nFormat: arccos([number])")
             a = getOneNumber()
             result = calc.icos(a)
             result_format = f"arccos({a}) = {result}"
 
         elif choice == 'itan':
+            print(f"\nCurrent trigonometric input mode: {trig_switch}")
             print("\nFormat: arctan([number])")
             a = getOneNumber()
             result = calc.itan(a)
@@ -219,7 +232,8 @@ def performCalcLoop(calc, dis):
 
         # Passes or invalid imput
         elif choice.lower() == "m+" or choice.lower() == "mc" or choice.lower() == "mrc" \
-            or choice.lower() == "hexadecimal" or choice.lower() == "binary" or choice.lower() == "decimal" or choice.lower() == "octal": 
+            or choice.lower() == "hexadecimal" or choice.lower() == "binary" or choice.lower() == "decimal" or choice.lower() == "octal" \
+                or choice.lower() == "degree" or choice.lower() == "radian" or choice.lower() == "switch" or choice.lower() == "trig": 
             continue
         else:
             print("\nThat is not a valid input. Please try again.", end="")
@@ -227,9 +241,14 @@ def performCalcLoop(calc, dis):
 
         print(f"\nCurrent decimal memory value: {memory}")
         print(f"Current display mode: {switch}\n")
-        print(f"{result_format}")
-        print("Displaying result in current display mode: ", end="")
-        displayResult(result, switch)
+        if choice in ['sin', 'cos', 'tan', 'isin', 'icos', 'itan']:
+            print(f"Current trigonometric display mode: {trig_switch}\n")
+            print(f"{result_format}")
+            displayTrigResult(result, trig_switch)
+        else:
+            print(f"{result_format}")
+            print("Displaying result in current display mode: ", end="")
+            displayResult(result, switch)
         
 
 # main start
