@@ -72,7 +72,7 @@ class Calculator:
         return math.pow(math.log1p(x),-1)
     
     def infinity(self, x):
-        return math.isinfinite(x)
+        return math.isfinite(x)
     
     def abs_val(self, x):
         return math.fabs(x)
