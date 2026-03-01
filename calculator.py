@@ -16,7 +16,7 @@ class Calculator:
     
     def div(self, x, y):
         if y == 0:
-            print("\nError: Division by zero is not allowed.")
+            print("\nError: Division by zero is not defined.")
             return None
         else:
             return x / y
