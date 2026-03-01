@@ -63,6 +63,98 @@ def performCalcLoop(calc, dis):
             a, b = getTwoNumbers()
             result = calc.add(a, b)
 
+        elif choice == 'sub':
+            a, b = getTwoNumbers()
+            result = calc.sub(a, b)
+
+        elif choice == 'mult':
+            a, b = getTwoNumbers()
+            result = calc.mult(a, b)
+
+        elif choice == 'div':
+            a, b = getTwoNumbers()
+            result = calc.div(a, b)
+
+        elif choice == 'sqr':
+            a = getOneNumber()
+            result = calc.sqr(a)
+
+        elif choice == 'root2':
+            a = getOneNumber()
+            result = calc.root2(a)
+
+        elif choice == 'exp':
+            a, b = getTwoNumbers()
+            result = calc.exp(a, b)
+
+        elif choice == 'inv':
+            a = getOneNumber()
+            result = calc.inv(a)
+
+        elif choice == 'neg':
+            a = getOneNumber()
+            result = calc.neg(a)
+
+        elif choice == 'sin':
+            a = getOneNumber()
+            result = calc.sin(a)
+
+        elif choice == 'cos':
+            a = getOneNumber()
+            result = calc.cos(a)
+
+        elif choice == 'tan':
+            a = getOneNumber()
+            result = calc.tan(a)
+
+        elif choice == 'isin':
+            a = getOneNumber()
+            result = calc.isin(a)
+
+        elif choice == 'icos':
+            a = getOneNumber()
+            result = calc.icos(a)
+
+        elif choice == 'itan':
+            a = getOneNumber()
+            result = calc.itan(a)
+
+        elif choice == 'deg':
+            a = getOneNumber()
+            result = calc.deg(a)
+
+        elif choice == 'rad':
+            a = getOneNumber()
+            result = calc.rad(a)
+
+        elif choice == 'fac':
+            a = getOneNumber()
+            result = calc.fac(a)
+
+        elif choice == 'log':
+            a = getOneNumber()
+            result = calc.log(a)
+
+        elif choice == 'log10':
+            a = getOneNumber()
+            result = calc.log10(a)
+
+        elif choice == 'natlog':
+            a = getOneNumber()
+            result = calc.natlog(a)
+
+        elif choice == 'in_natlog':
+            a = getOneNumber()
+            result = calc.in_natlog(a)
+
+        elif choice == 'infinity':
+            a = getOneNumber()
+            result = calc.infinity(a)
+
+        elif choice == 'abs_val':
+            a = getOneNumber()
+            result = calc.abs_val(a)
+
         # Passes or invalid imput
         elif choice.lower() == "m+" or choice.lower() == "mc" or choice.lower() == "mrc" \
             or choice.lower() == "hexadecimal" or choice.lower() == "binary" or choice.lower() == "decimal" or choice.lower() == "octal": 
