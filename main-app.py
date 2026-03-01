@@ -1,63 +1,44 @@
 from calculator import Calculator
 from Display_functions import Display
 
+def history_call(value, result_history):
+    if value == "h":
+        while True:
+            Display.display_history(None, "h", result_history)
+            value = input("\nEnter the index of the history value you wish to use or 'e' to return to number input \nIndex: ")
+            if value == "e":
+                return None
+            value = int(value)
+            value = Display.history_call(None, value, result_history)
+            if value is not None:
+                print(f"\nUsing history value: {value}")
+                value = float(value)
+                return value
+            else:
+                continue
+    else:
+        value = float(value)
+        return value
+
+
 def getTwoNumbers(result_history):
     while True:
         a = input("\nIf wish to use history input 'h' else input number \nfirst number? ")
-        if a == "h":
-            while True:
-                Display.display_history(None, "h", result_history)
-                a = input("\nEnter the index of the history value you wish to use or 'e' to return to number input \nIndex: ")
-                if a == "e":
-                    break
-                a = int(a)
-                a = Display.history_call(None, a, result_history)
-                if a is not None:
-                    break
-            if a == "e":
-                continue
-            else:
-                print(f"\nUsing history value: {a}")
-                break
-        else:
-            a = float(a)
+        a = history_call(a, result_history)
+        if a is not None:
             break
     while True:
         b = input("\nIf wish to use history input 'h' else input number \nsecond number? ")
-        if b == "h":
-            Display.display_history(None, "h", result_history)
-            while True:
-                b = input("\nEnter the index of the history value you wish to use or 'e' to return to number input \nIndex: ")
-                if b == "e":
-                    break
-                b = int(b)
-                b = Display.history_call(None, b, result_history)
-                if b is not None:
-                    break
-            print(f"\nUsing history value: {b}")
-            break
-        else:
-            b = float(b)
+        b = history_call(b, result_history)
+        if b is not None:
             break
     return a, b
 
 def getOneNumber(result_history):
     while True:
         a = input("\nIf wish to use history input 'h' else input number \nnumber? ")
-        if a == "h":
-            while True:
-                Display.display_history(None, "h", result_history)
-                a = input("\nEnter the index of the history value you wish to use or 'e' to return to number input \nIndex: ")
-                if a == "e":
-                    break
-                a = int(a)
-                a = Display.history_call(None, a, result_history)
-                if a is not None:
-                    break
-            print(f"\nUsing history value: {a}")
-            break
-        else:
-            a = float(a)
+        a = history_call(a, result_history)
+        if a is not None:
             break
     return a
     
