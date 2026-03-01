@@ -10,6 +10,16 @@ def getOneNumber():
     a = float(input("\nnumber? "))
     return a
 
+def trig_display(mode, switch):
+    if mode == "deg":
+        print("\nDisplaying result in degree mode.", end="")
+        return mode
+    elif mode == "rad":
+        print("\nDisplaying result in radian mode.", end="")
+        return mode
+    else:
+        return switch  # Return the current display mode if no switch command is given
+    
 def displayResult(x: float, mode: str):
     if mode == "hexadecimal":
         print(hex(int(x))[2:], end="")  # [2:] to remove the '0x' prefix from the hexadecimal representation
@@ -50,13 +60,16 @@ def performCalcLoop(calc, dis):
                     print("\nCommand not recognized. Rerunning user_interface.exe, please try again.")
     
         elif choice == 'help':
-            print("\nAvailable operations: add, sub, mult, div, sqr, root2, exp, inv, neg, sin, cos, tan, isin, icos, itan, deg, rad, fac, log, log10, natlog, in_natlog, infinity, abs_val")
+            print("\nAvailable operations: add, sub, mult, div, sqr, root2, exp, inv, neg, sin, cos, tan, isin, icos, itan, deg, rad, fac, log, log10, natlog, in_natlog, finite, abs_val")
             print("Memory operations: M+ (store current result in memory), MC (clear memory), MRC (recall memory)")
-            print("Display mode operations: hexadecimal, binary, decimal, octal")
+            print("Display mode operations: hexadecimal, binary, decimal, octal, switch (automatically switch display mode), trig (automatically switch trigonometric display mode), deg (switch to degree mode), rad (switch to radian mode)")
             print("Other operations: clear (clears the display), q (quit the calculator)")
             continue
         elif choice == 'clear':
             dis.display_clear(choice)
+            continue
+        elif choice.lower() == "switch":
+            switch = dis.auto_display_mode(switch)
             continue
 
         # Implementing calculator operations
@@ -192,11 +205,11 @@ def performCalcLoop(calc, dis):
             result = calc.in_natlog(a)
             result_format = f"in_ln({a}) = {result}"
 
-        elif choice == 'infinity':
-            print("\nFormat: infinity([number])")
+        elif choice == 'finite':
+            print("\nFormat: finite([number])")
             a = getOneNumber()
             result = calc.infinity(a)
-            result_format = f"infinity({a}) = {result}"
+            result_format = f"is finite({a}) = {result}"
 
         elif choice == 'abs_val':
             print("\nFormat: abs([number])")

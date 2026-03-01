@@ -12,6 +12,28 @@ class Display:
         elif value.lower() == "mrc":
             print(f"\nCurrent memory value: {memory_value}", end="")
         return memory_value
+    
+    def trig_display(self, mode, switch):
+        # Code to display trigonometric results in the correct mode
+        if mode.lower() == "deg":
+            print("\nDisplaying result in degree mode.", end="")
+            return mode.lower()
+        elif mode.lower() == "rad":
+            print("\nDisplaying result in radian mode.", end="")
+            return mode.lower()
+        else:
+            return switch.lower()  # Return the current display mode if no switch command is given
+        
+    def auto_trig_display(self, switch):
+        # Code to automatically switch trigonometric display mode based on the current mode
+        if switch == "deg":
+            print("\nDisplaying result in radian mode.", end="")
+            return "rad"
+        elif switch == "rad":
+            print("\nDisplaying result in degree mode.", end="")
+            return "deg"
+        else:
+            return switch  # Return the current display mode if no auto switch is defined
 
     def switch_display_mode(self, mode, switch):
     # Code to switch display mode
@@ -30,6 +52,25 @@ class Display:
         else:
             return switch.lower()  # Return the current display mode if no switch command is given
         
+    def auto_display_mode(self, switch):
+        # Code to automatically switch display mode based on the result
+        if switch == "hexadecimal":
+            print("\nDisplaying result in binary display mode.", end="")
+            return "binary"
+        elif switch == "binary":
+            print("\nDisplaying result in octal display mode.", end="")
+            return "octal"
+        elif switch == "octal":
+            print("\nDisplaying result in decimal display mode.", end="")
+            return "decimal"
+        elif switch == "decimal":
+            print("\nDisplaying result in hexadecimal display mode.", end="")
+            return "hexadecimal"
+        
+        else:
+            return switch  # Return the current display mode if no auto switch is defined
+        
+
     def self_destruct(self):
         # Code to simulate self destruct sequence and exit the program
         time.sleep(0.5)
