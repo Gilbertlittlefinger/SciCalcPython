@@ -37,6 +37,7 @@ def performCalcLoop(calc, dis):
     result = 0
     result_format = ""
     memory = 0
+    result_history = []
     switch = "decimal"  # Default display mode
     trig_switch = "degree"  # Default trigonometric display mode
     print("\nWelcome to the Scientific Calculator!", end="")
@@ -48,6 +49,7 @@ def performCalcLoop(calc, dis):
         switch = dis.switch_display_mode(choice, switch)    # Switch display mode if the user input is a display mode command
         memory = dis.store_memory(choice, memory, result)  # Store the user's choice in memory
         trig_switch = dis.trig_display(choice, trig_switch)          # Switch trigonometric display mode if the user input is a trig display mode command
+        dis.display_history(choice, result_history)
 
         # Display operations and quit command
         if choice == 'q':
@@ -233,7 +235,8 @@ def performCalcLoop(calc, dis):
         # Passes or invalid imput
         elif choice.lower() == "m+" or choice.lower() == "mc" or choice.lower() == "mrc" \
             or choice.lower() == "hexadecimal" or choice.lower() == "binary" or choice.lower() == "decimal" or choice.lower() == "octal" \
-                or choice.lower() == "degree" or choice.lower() == "radian" or choice.lower() == "switch" or choice.lower() == "trig": 
+                or choice.lower() == "degree" or choice.lower() == "radian" or choice.lower() == "switch" or choice.lower() == "trig" \
+                    or choice.lower() == "h" or choice.lower() == "hc":
             continue
         else:
             print("\nThat is not a valid input. Please try again.", end="")
@@ -245,11 +248,12 @@ def performCalcLoop(calc, dis):
             print(f"Current trigonometric display mode: {trig_switch}\n")
             print(f"{result_format}")
             displayTrigResult(result, trig_switch)
+            memory_history = dis.memory_history(result, result_history)
         else:
             print(f"{result_format}")
             print("Displaying result in current display mode: ", end="")
             displayResult(result, switch)
-        
+            memory_history = dis.memory_history(result, result_history)
 
 # main start
 def main():

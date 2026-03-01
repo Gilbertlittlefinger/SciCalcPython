@@ -13,12 +13,24 @@ class Display:
             print(f"\nCurrent memory value: {memory_value}", end="")
         return memory_value
     
+    def memory_history(self, value, history_value):
+        history_value.append(value)
+
+    def display_history(self, value, history_value):
+        if value.lower() == "h":
+            print("\nMemory history:", end="")
+            print(history_value)
+        elif value.lower() == "hc":
+            history_value.clear()
+            print("\nMemory history cleared.")
+
+
     def trig_display(self, mode, switch):
         # Code to display trigonometric results in the correct mode
-        if mode.lower() == "deg":
+        if mode.lower() == "degree":
             print("\nDisplaying result in degree mode.", end="")
             return mode.lower()
-        elif mode.lower() == "rad":
+        elif mode.lower() == "radian":
             print("\nDisplaying result in radian mode.", end="")
             return mode.lower()
         else:
@@ -26,12 +38,12 @@ class Display:
         
     def auto_trig_display(self, switch):
         # Code to automatically switch trigonometric display mode based on the current mode
-        if switch == "deg":
+        if switch == "degree":
             print("\nDisplaying result in radian mode.", end="")
-            return "rad"
-        elif switch == "rad":
+            return "radian"
+        elif switch == "radian":
             print("\nDisplaying result in degree mode.", end="")
-            return "deg"
+            return "degree"
         else:
             return switch  # Return the current display mode if no auto switch is defined
 
