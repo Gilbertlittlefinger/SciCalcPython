@@ -76,7 +76,7 @@ def performCalcLoop(calc, dis):
     
     while True:
         print("\n")
-        choice = input("Type help for a list of operations or enter an operation \noperation: ")
+        choice = input("Type 'help' for a list of operations or enter an operation \noperation: ")
         
         switch = dis.switch_display_mode(choice, switch)    # Switch display mode if the user input is a display mode command
         memory = dis.store_memory(choice, memory, result)  # Store the user's choice in memory
