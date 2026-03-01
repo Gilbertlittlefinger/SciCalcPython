@@ -109,6 +109,8 @@ class TestStringMethods(unittest.TestCase):
         c = Calculator()
         self.assertEqual(c.infinity(9),NaN)
     
-
+    def abs_val(self):
+        c = Calculator()
+        self.assertEqual(c.abs_val(-9),9)
 if __name__ == '__main__':
     unittest.main()

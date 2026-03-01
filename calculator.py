@@ -65,12 +65,6 @@ class Calculator:
     def log10(self, x):
         return math.log10(x)
     
-    def log(self, x):
-        return math.log(x)
-    
-    def log(self, x):
-        return math.log(x)
-    
     def natlog(self, x):
         return math.log1p(x)
     
@@ -79,5 +73,7 @@ class Calculator:
     
     def infinity(self, x):
         return math.isinfinite(x)
-
+    
+    def abs_val(self, x):
+        return math.fabs(x)
 # add lots more methods to this calculator class.
