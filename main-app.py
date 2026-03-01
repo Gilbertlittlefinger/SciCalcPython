@@ -1,13 +1,64 @@
 from calculator import Calculator
 from Display_functions import Display
 
-def getTwoNumbers():
-    a = float(input("\nfirst number? "))
-    b = float(input("second number? "))
+def getTwoNumbers(result_history):
+    while True:
+        a = input("\nIf wish to use history input 'h' else input number \nfirst number? ")
+        if a == "h":
+            while True:
+                Display.display_history(None, "h", result_history)
+                a = input("\nEnter the index of the history value you wish to use or 'e' to return to number input \nIndex: ")
+                if a == "e":
+                    break
+                a = int(a)
+                a = Display.history_call(None, a, result_history)
+                if a is not None:
+                    break
+            if a == "e":
+                continue
+            else:
+                print(f"\nUsing history value: {a}")
+                break
+        else:
+            a = float(a)
+            break
+    while True:
+        b = input("\nIf wish to use history input 'h' else input number \nsecond number? ")
+        if b == "h":
+            Display.display_history(None, "h", result_history)
+            while True:
+                b = input("\nEnter the index of the history value you wish to use or 'e' to return to number input \nIndex: ")
+                if b == "e":
+                    break
+                b = int(b)
+                b = Display.history_call(None, b, result_history)
+                if b is not None:
+                    break
+            print(f"\nUsing history value: {b}")
+            break
+        else:
+            b = float(b)
+            break
     return a, b
 
-def getOneNumber():
-    a = float(input("\nnumber? "))
+def getOneNumber(result_history):
+    while True:
+        a = input("\nIf wish to use history input 'h' else input number \nnumber? ")
+        if a == "h":
+            while True:
+                Display.display_history(None, "h", result_history)
+                a = input("\nEnter the index of the history value you wish to use or 'e' to return to number input \nIndex: ")
+                if a == "e":
+                    break
+                a = int(a)
+                a = Display.history_call(None, a, result_history)
+                if a is not None:
+                    break
+            print(f"\nUsing history value: {a}")
+            break
+        else:
+            a = float(a)
+            break
     return a
     
 def displayResult(x: float, mode: str):
@@ -66,6 +117,7 @@ def performCalcLoop(calc, dis):
         elif choice == 'help':
             print("\nAvailable operations: add, sub, mult, div, sqr, root2, exp, inv, neg, sin, cos, tan, isin, icos, itan, deg, rad, fac, log, log10, natlog, in_natlog, finite, abs_val")
             print("Memory operations: M+ (store current result in memory), MC (clear memory), MRC (recall memory)")
+            print("Memory history operations: H (display memory history), HC (clear memory history)")
             print("Display mode operations: hexadecimal, binary, decimal, octal, switch (automatically switch display mode), trig (automatically switch trigonometric display mode), degree (switch to degree mode), radian (switch to radian mode)")
             print("Other operations: clear (clears the display), q (quit the calculator)")
             continue
@@ -83,62 +135,66 @@ def performCalcLoop(calc, dis):
         # Implementing calculator operations
         elif choice == 'add':
             print("\nFormat: [number1] + [number2]")
-            a, b = getTwoNumbers()
+            a, b = getTwoNumbers(result_history)
             result = calc.add(a, b)
             result_format = f"{a} + {b} = {result}"
 
         elif choice == 'sub':
             print("\nFormat: [number1] - [number2]")
-            a, b = getTwoNumbers()
+            a, b = getTwoNumbers(result_history)
             result = calc.sub(a, b)
             result_format = f"{a} - {b} = {result}"
 
         elif choice == 'mult':
             print("\nFormat: [number1] * [number2]")
-            a, b = getTwoNumbers()
+            a, b = getTwoNumbers(result_history)
             result = calc.mult(a, b)
             result_format = f"{a} * {b} = {result}"
 
         elif choice == 'div':
             print("\nFormat: [number1] / [number2]")
-            a, b = getTwoNumbers()
+            a, b = getTwoNumbers(result_history)
             result = calc.div(a, b)
-            result_format = f"{a} / {b} = {result}"
+            if b == 0:
+                result_format = f"{a} / {b} = Error (division by zero is not allowed)"
+                continue
+            else:
+                result_format = f"{a} / {b} = {result}"
 
         elif choice == 'sqr':
             print("\nFormat: [number] ^ 2")
-            a = getOneNumber()
+            a = getOneNumber(result_history)
             result = calc.sqr(a)
             result_format = f"{a} ^ 2 = {result}"
 
         elif choice == 'root2':
             print("\nFormat: sqrt([number])")
-            a = getOneNumber()
+            a = getOneNumber(result_history)
             result = calc.root2(a)
             result_format = f"sqrt({a}) = {result}"
 
         elif choice == 'exp':
             print("\nFormat: [number1] ^ [number2]")
-            a, b = getTwoNumbers()
+            a, b = getTwoNumbers(result_history)
             result = calc.exp(a, b)
             result_format = f"{a} ^ {b} = {result}"
 
         elif choice == 'inv':
             print("\nFormat: 1 / [number]")
-            a = getOneNumber()
+            a = getOneNumber(result_history)
             result = calc.inv(a)
             result_format = f"1 / {a} = {result}"
 
         elif choice == 'neg':
             print("\nFormat: -[number]")
-            a = getOneNumber()
+            a = getOneNumber(result_history)
             result = calc.neg(a)
             result_format = f"-{a} = {result}"
 
         elif choice == 'sin':
             print(f"\nCurrent trigonometric input mode: {trig_switch}")
             print("\nFormat: sin([number])")
-            a = getOneNumber()
+            a = getOneNumber(result_history)
             a = calc.rad(a) if trig_switch == "degree" else a  # Convert input to radians if in degree mode
             result = calc.sin(a)
             result_format = f"sin({a}) = {result}"
@@ -146,89 +202,89 @@ def performCalcLoop(calc, dis):
         elif choice == 'cos':
             print(f"\nCurrent trigonometric input mode: {trig_switch}")
             print("\nFormat: cos([number])")
-            a = getOneNumber()
+            a = getOneNumber(result_history)
             result = calc.cos(a)
             result_format = f"cos({a}) = {result}"
 
         elif choice == 'tan':
             print(f"\nCurrent trigonometric input mode: {trig_switch}")
             print("\nFormat: tan([number])")
-            a = getOneNumber()
+            a = getOneNumber(result_history)
             result = calc.tan(a)
             result_format = f"tan({a}) = {result}"
 
         elif choice == 'isin':
             print(f"\nCurrent trigonometric input mode: {trig_switch}")
             print("\nFormat: arcsin([number])")
-            a = getOneNumber()
+            a = getOneNumber(result_history)
             result = calc.isin(a)
             result_format = f"arcsin({a}) = {result}"
 
         elif choice == 'icos':
             print(f"\nCurrent trigonometric input mode: {trig_switch}")
             print("\nFormat: arccos([number])")
-            a = getOneNumber()
+            a = getOneNumber(result_history)
             result = calc.icos(a)
             result_format = f"arccos({a}) = {result}"
 
         elif choice == 'itan':
             print(f"\nCurrent trigonometric input mode: {trig_switch}")
             print("\nFormat: arctan([number])")
-            a = getOneNumber()
+            a = getOneNumber(result_history)
             result = calc.itan(a)
             result_format = f"arctan({a}) = {result}"
 
         elif choice == 'deg':
             print("\nFormat: deg([number])")
-            a = getOneNumber()
+            a = getOneNumber(result_history)
             result = calc.deg(a)
             result_format = f"deg({a}) = {result}"
 
         elif choice == 'rad':
             print("\nFormat: rad([number])")
-            a = getOneNumber()
+            a = getOneNumber(result_history)
             result = calc.rad(a)
             result_format = f"rad({a}) = {result}"
 
         elif choice == 'fac':
             print("\nFormat: [number]!")
-            a = getOneNumber()
+            a = getOneNumber(result_history)
             result = calc.fac(a)
             result_format = f"{a}! = {result}"
 
         elif choice == 'log':
             print("\nFormat: log([number])")
-            a = getOneNumber()
+            a = getOneNumber(result_history)
             result = calc.log(a)
             result_format = f"log({a}) = {result}"
 
         elif choice == 'log10':
             print("\nFormat: log10([number])")
-            a = getOneNumber()
+            a = getOneNumber(result_history)
             result = calc.log10(a)
             result_format = f"log10({a}) = {result}"
 
         elif choice == 'natlog':
             print("\nFormat: ln([number])")
-            a = getOneNumber()
+            a = getOneNumber(result_history)
             result = calc.natlog(a)
             result_format = f"ln({a}) = {result}"
 
         elif choice == 'in_natlog':
             print("\nFormat: in_ln([number])")
-            a = getOneNumber()
+            a = getOneNumber(result_history)
             result = calc.in_natlog(a)
             result_format = f"in_ln({a}) = {result}"
 
         elif choice == 'finite':
             print("\nFormat: finite([number])")
-            a = getOneNumber()
+            a = getOneNumber(result_history)
             result = calc.infinity(a)
             result_format = f"is finite({a}) = {result}"
 
         elif choice == 'abs_val':
             print("\nFormat: abs([number])")
-            a = getOneNumber()
+            a = getOneNumber(result_history)
             result = calc.abs_val(a)
             result_format = f"abs({a}) = {result}"
 
@@ -248,6 +304,8 @@ def performCalcLoop(calc, dis):
             print(f"Current trigonometric display mode: {trig_switch}\n")
             print(f"{result_format}")
             displayTrigResult(result, trig_switch)
+            if trig_switch == "degree":
+                result = calc.deg(result)
             memory_history = dis.memory_history(result, result_history)
         else:
             print(f"{result_format}")

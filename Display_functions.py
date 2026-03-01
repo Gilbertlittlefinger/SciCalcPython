@@ -19,10 +19,17 @@ class Display:
     def display_history(self, value, history_value):
         if value.lower() == "h":
             print("\nMemory history:", end="")
-            print(history_value)
+            print(history_value, end="")
         elif value.lower() == "hc":
             history_value.clear()
-            print("\nMemory history cleared.")
+            print("\nMemory history cleared.", end="")
+
+    def history_call(self, value, history_value):
+        if value < 0 or value >= len(history_value):
+            print("\nInvalid history index. Please try again.")
+            return None
+        else:
+            return history_value[value]
 
 
     def trig_display(self, mode, switch):

@@ -9,13 +9,17 @@ class Calculator:
         return x + y
 
     def sub(self, x, y):
-        return x -y
+        return x - y
     
     def mult(self, x, y):
         return x * y
     
     def div(self, x, y):
-        return x / y
+        if y == 0:
+            print("\nError: Division by zero is not allowed.")
+            return None
+        else:
+            return x / y
     
     def sqr(self, x):
         return x * x
